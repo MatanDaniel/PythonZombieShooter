@@ -8,7 +8,6 @@ class Player(pygame.sprite.Sprite): #base for sprite objects
         self.ammo = 0 #player's ammo
         self.is_alive = True
         self.moving = False
-        self.shooting = False
         self.acquire_ammo = False
         self.level = 0
         self.health = 100 #player's health
@@ -22,7 +21,9 @@ class Player(pygame.sprite.Sprite): #base for sprite objects
         screen.blit(self.image,self.rect.center) #blit function to draw the player in coordinate (0,0)
 
     def attack(self):
-        pass
+        if self.ammo == 0:
+            return
+
 
     def pick_ammo(self):
         pass

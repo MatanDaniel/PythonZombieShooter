@@ -1,15 +1,23 @@
 import sys
 import pygame
 import player
+import zombie
+import bullet
 
 
 pygame.init()
 
 d = (500,500)
 
+#Program's objects:
 screen = pygame.display.set_mode(d) # my screen
 player = player.Player()
 player.draw(screen) #recording
+zombie1 = zombie.Zombie()
+zombie1.draw(screen)
+bullet = bullet.Bullet()
+bullet.draw(screen)
+
 
 screen.fill("lightblue")
 
@@ -25,6 +33,11 @@ while True:
     player.move(keys[pygame.K_d] - keys[pygame.K_a], keys[pygame.K_s] - keys[pygame.K_w])
     screen.fill("lightgrey")
     player.draw(screen)
+    zombie1.draw(screen)
+    zombie1.point_at(*player.rect.center) #looking at player
+    zombie1.move(player)
+
+
 
     pygame.display.update() #rendring for pygame
     pygame.time.delay(16) #60 FPS
