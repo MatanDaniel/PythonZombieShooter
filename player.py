@@ -1,11 +1,13 @@
 import pygame
 from pygame.sprite import AbstractGroup
 
+import bullet
+
 
 class Player(pygame.sprite.Sprite): #base for sprite objects
     def __init__(self, *groups: AbstractGroup):
         super().__init__(*groups)
-        self.ammo = 0 #player's ammo
+        self.ammo = 100 #player's ammo
         self.is_alive = True
         self.moving = False
         self.acquire_ammo = False
@@ -16,14 +18,19 @@ class Player(pygame.sprite.Sprite): #base for sprite objects
         self.image = self.original_image
         self.rect = self.image.get_rect(center = self.position)# boundary box of the player
         self.velocity = 5 #player's speed
+        self.bullets = pygame.sprite.Group()
+
 
     def draw(self, screen:pygame.Surface):
-        screen.blit(self.image,self.rect.center) #blit function to draw the player in coordinate (0,0)
+        screen.blit(self.image,self.rect) #blit function to draw the player in coordinate (0,0)
+        pygame.draw.rect(screen,"red",self.rect,width = 1 )#enabling player's rectangle
+        self.bullets.draw(screen)
+
 
     def attack(self):
         if self.ammo == 0:
             return
-
+        self.bullets.add(bullet.Bullet())
 
     def pick_ammo(self):
         pass

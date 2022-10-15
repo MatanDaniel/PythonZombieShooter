@@ -13,7 +13,8 @@ class Zombie(pygame.sprite.Sprite):
         self.velocity = 4 #zombie's speed
 
     def draw(self, screen:pygame.Surface):
-        screen.blit(self.image,self.rect.center)
+        screen.blit(self.image,self.rect)
+        pygame.draw.rect(screen, "blue",self.rect, width = 1) #enabling zombie's rectangle
 
     def point_at(self, x, y): #mouse rotation ability
         direction = pygame.math.Vector2(x, y) - self.rect.center

@@ -4,9 +4,7 @@ import player
 import zombie
 import bullet
 
-
 pygame.init()
-
 d = (500,500)
 
 #Program's objects:
@@ -18,7 +16,6 @@ zombie1.draw(screen)
 bullet = bullet.Bullet()
 bullet.draw(screen)
 
-
 screen.fill("lightblue")
 
 while True:
@@ -27,6 +24,10 @@ while True:
         if event.type == pygame.QUIT: #Closing the window of the game when exit botton being pressed
             pygame.quit()
             sys.exit() # closing system's window
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                player.attack()
+
 
     player.point_at(*pygame.mouse.get_pos())
     keys = pygame.key.get_pressed()
@@ -36,7 +37,6 @@ while True:
     zombie1.draw(screen)
     zombie1.point_at(*player.rect.center) #looking at player
     zombie1.move(player)
-
 
 
     pygame.display.update() #rendring for pygame
