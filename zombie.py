@@ -1,3 +1,5 @@
+import random
+
 import pygame
 from pygame.sprite import AbstractGroup
 class Zombie(pygame.sprite.Sprite):
@@ -6,7 +8,7 @@ class Zombie(pygame.sprite.Sprite):
         self.is_alive = True
         self.moving = False
         self.health = 100 #zombie's health
-        self.position = (20,20)
+        self.position = (random.randint(0,1000),random.randint(0,1000))
         self.original_image = pygame.image.load("Assets\\zup.png") #zombie's image from Assets folder
         self.image = self.original_image
         self.rect= self.image.get_rect(center = self.position) #boundary box for zombie
@@ -35,3 +37,14 @@ class Zombie(pygame.sprite.Sprite):
     def attack(self):
         pass
         #Rect.Contains
+
+    def take_damage(self):
+        self.health -= 20
+
+        if self.health <= 0:
+            self.kill()
+
+    def update(self, *args):
+        self.draw(args[0])
+        self.move(args[1])
+        self.point_at(*args[1].rect.center)
